@@ -62,27 +62,24 @@ $(function() {
 		});
 	});
 
-    /* Test suite IV: "New Feed Selection" */
+   /* Test suite IV: "New Feed Selection" */
     describe('New feed Selection',function(){
-    	//  two variables,for feed 0 and for feed 1
-    	var feedZero,
-			feedOne;
+    	//   variable for previous content
+    	var previousContent;
+    	 
 		beforeEach(function(done) {
-			// load feed 0's header title and store in var feedZero for comparison to next feed
+			// load feed previousContent for comparison to next feed
 			loadFeed(0, function() {
-				feedZero = $('.header-title').html();
-   			
-				loadFeed(1, function() {
-				done();
+				previousContent = $('.feed').html();
+   				loadFeed(1, done) 
 				});
 			});
-		});
+		
 		/* Test IV.A: ensure when a new feed is loaded by the loadFeed function that the content actually changes */
-		it('feed content successfully changes', function(done) {
-			// compare feedZero to feedOne, they should not be the same
-			feedOne = $('.header-title').html();
-			expect(feedZero).not.toBe(feedOne);
-			done();
+		it('feed content successfully changes', function() {
+			// compare previous content to next, they should not be the same
+			expect($('.feed').html()).not.toEqual(previousContent);
+			
 		});
 	});
 
